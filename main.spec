@@ -1,14 +1,18 @@
 # -*- mode: python ; coding: utf-8 -*-
+import os
 
 block_cipher = None
+
+# Prepare datas - include data directory if it exists
+datas = []
+if os.path.exists('data'):
+    datas.append(('data', 'data'))
 
 a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[
-        ('data', 'data'),
-    ],
+    datas=datas,
     hiddenimports=[
         'lxml',
         'lxml.etree',
@@ -75,5 +79,4 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon='NONE',
 )
